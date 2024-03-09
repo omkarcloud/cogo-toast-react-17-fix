@@ -1,4 +1,4 @@
-**cogo-toast-react-17-fix**
+## cogo-toast-react-17-fix
 
 A compatibility fix for the popular 'cogo-toast' package that resolves dependency conflicts with React 17+.
 
@@ -50,9 +50,12 @@ export default App;
 * Please refer to the original 'cogo-toast' documentation for detailed usage and customization of toast messages: [https://github.com/Cogoport/cogo-toast](https://github.com/Cogoport/cogo-toast) 
  
 ---
- 
-[![Star on GitHub](https://img.shields.io/github/stars/omkarcloud/cogo-toast-react-17-fix.svg?style=social)](https://github.com/omkarcloud/cogo-toast-react-17-fix)
 
-## **Found cogo-toast-react-17-fix helful?**
 
-If you find this package helpful, please consider giving the repository a star! 
+## Love It? [Star It ⭐!](https://github.com/omkarcloud/cogo-toast-react-17-fix)
+
+Become one of our amazing stargazers by giving us a star ⭐ on GitHub!
+
+It's just one click, but it means the world to me.
+
+[![Stargazers for @omkarcloud/cogo-toast-react-17-fix](https://bytecrank.com/nastyox/reporoster/php/stargazersSVG.php?user=omkarcloud&repo=cogo-toast-react-17-fix)](https://github.com/omkarcloud/cogo-toast-react-17-fix/stargazers)
