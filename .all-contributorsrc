@@ -1,0 +1,62 @@
+{
+  "projectName": "cogo-toast-react-17-fix",
+  "projectOwner": "Cogoport",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "eslint",
+  "contributors": [
+    {
+      "login": "anmolmahatpurkar",
+      "name": "Anmol Mahatpurkar",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/36692003?v=4",
+      "profile": "https://github.com/anmolmahatpurkar",
+      "contributions": [
+        "code",
+        "design",
+        "doc"
+      ]
+    },
+    {
+      "login": "balazsorban44",
+      "name": "Balázs Orbán",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/18369201?v=4",
+      "profile": "https://balazsorban.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Keaws",
+      "name": "Vitalii Kalchuk",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/5289466?v=4",
+      "profile": "https://github.com/Keaws",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "amarpathak",
+      "name": "Amar Pathak",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/24917309?v=4",
+      "profile": "http://www.apathak.com",
+      "contributions": [
+        "doc"
+       ]
+    },
+    {
+      "login": "nataly87s",
+      "name": "Nataly Shrits",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/7895237?s=460&v=4",
+      "profile": "https://github.com/nataly87s",
+      "contributions": [
+        "code"
+       ]
+    },
+  ],
+  "contributorsPerLine": 7
+}

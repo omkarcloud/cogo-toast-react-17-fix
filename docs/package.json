@@ -1,0 +1,29 @@
+{
+	"name": "cogo-toast-react-17-fix-docs",
+	"version": "1.0.0",
+	"license": "MIT",
+	"scripts": {
+		"dev": "next",
+		"build": "next build",
+		"start": "next start",
+		"export": "yarn run build && next export",
+		"deploy": "rm -rf node_modules/.cache && yarn run export && touch out/.nojekyll"
+	},
+	"dependencies": {
+		"@emotion/core": "10.0.28",
+		"@emotion/styled": "10.0.27",
+		"babel-plugin-emotion": "10.0.33",
+		"cogo-toast-react-17-fix": "link:../",
+		"next": "^9.4.1",
+		"prism-react-renderer": "^1.1.0",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1"
+	},
+	"devDependencies": {
+    "@types/node": "^14.0.1",
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "typescript": "3.9.2",
+		"serve": "11.3.0"
+	}
+}
