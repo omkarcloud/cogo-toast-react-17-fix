@@ -51,7 +51,6 @@ export default App;
  
 ---
 
-
 ## Love It? [Star It ⭐!](https://github.com/omkarcloud/cogo-toast-react-17-fix)
 
 Become one of our amazing stargazers by giving us a star ⭐ on GitHub!
