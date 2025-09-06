@@ -8,7 +8,7 @@ import postcss from 'rollup-plugin-postcss';
 import svgr from '@svgr/rollup';
 
 import react from 'react';
-import reactDom from 'react-dom';
+import reactDom from 'react-dom/client';
 
 import pkg from './package.json';
 

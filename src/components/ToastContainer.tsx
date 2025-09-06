@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { shape, number } from 'prop-types';
+import { shape } from 'prop-types';
 
 import Toast from './Toast';
 
@@ -18,42 +18,75 @@ type CToastItem = {
 	id: number;
 	text: string;
 	type: string;
+	show: boolean; // Add a `show` property to control visibility
+	position?: string;
 	hideAfter: number;
 	onClick: any;
 	onHide: any;
 };
 
-type CToastContainerProps = Partial<{
-	toast: {
-		position?: string;
-	};
-	hiddenID: number;
-}>;
+// --- Start of Changes ---
 
-const ToastContainer: React.FC<CToastContainerProps> = ({ toast, hiddenID }) => {
+// 1. Update props to accept the event emitter
+type CToastContainerProps = {
+	events: {
+		on: (event: string, callback: (data: any) => void) => void;
+		off: (event: string, callback: (data: any) => void) => void;
+	};
+};
+
+const ToastContainer: React.FC<CToastContainerProps> = ({ events }) => {
 	const [allToasts, setToasts] = useState(defaultToasts);
 
+	// 2. Use useEffect to subscribe and unsubscribe from events
 	useEffect(() => {
-		if (toast) {
+		const addToast = (toast) => {
 			setToasts((prevToasts) => {
 				const position = camelCase(toast.position || 'top-center');
-				return { ...prevToasts, [position]: [...prevToasts[position], toast] };
+				// Add `show: true` to the new toast object
+				return { ...prevToasts, [position]: [...prevToasts[position], { ...toast, show: true }] };
 			});
-		}
-	}, [toast]);
-
-	const handleRemove = (callback) => {
-		return (id: number, position: string) => {
-			setToasts((prevToasts) => {
-				const toastPosition = camelCase(position || 'top-center');
-				return {
-					...prevToasts,
-					[toastPosition]: prevToasts[toastPosition].filter((item: CToastItem) => item.id !== id),
-				};
-			});
-			typeof callback === 'function' && callback(id, position);
 		};
-	}
+
+		const hideToast = (id: number) => {
+			setToasts((prevToasts) => {
+				const newToasts = { ...prevToasts };
+				// Find the toast with the matching ID and set its `show` property to false
+				for (const position in newToasts) {
+					newToasts[position] = newToasts[position].map((toast: CToastItem) => {
+						if (toast.id === id) {
+							return { ...toast, show: false };
+						}
+						return toast;
+					});
+				}
+				return newToasts;
+			});
+		};
+
+		// Subscribe
+		events.on('add', addToast);
+		events.on('hide', hideToast);
+
+		// Unsubscribe on component unmount
+		return () => {
+			events.off('add', addToast);
+			events.off('hide', hideToast);
+		};
+	}, [events]); // Dependency array includes events
+
+	// 3. handleRemove is now simpler, it just removes the toast from state
+	const handleRemove = (id: number, position: string) => {
+		setToasts((prevToasts) => {
+			const toastPosition = camelCase(position || 'top-center');
+			return {
+				...prevToasts,
+				[toastPosition]: prevToasts[toastPosition].filter((item: CToastItem) => item.id !== id),
+			};
+		});
+	};
+	
+	// --- End of Changes ---
 
 	const rows = ['top', 'bottom'];
 	const groups = ['Left', 'Center', 'Right'];
@@ -68,6 +101,7 @@ const ToastContainer: React.FC<CToastContainerProps> = ({ toast, hiddenID }) => 
 						return (
 							<div key={type} className={className}>
 								{allToasts[type].map((item: CToastItem) => (
+									// @ts-ignore
 									<Toast
 										key={`${type}_${item.id}`}
 										{...item}
@@ -76,8 +110,10 @@ const ToastContainer: React.FC<CToastContainerProps> = ({ toast, hiddenID }) => 
 										type={item.type}
 										onClick={item.onClick}
 										hideAfter={item.hideAfter}
-										show={hiddenID !== item.id}
-										onHide={handleRemove(item.onHide)}
+										// 4. `show` now comes from the toast's state, not a separate prop
+										show={item.show}
+										// onHide will call handleRemove to delete it from state after the animation
+										onHide={handleRemove}
 									/>
 								))}
 							</div>
@@ -89,14 +125,5 @@ const ToastContainer: React.FC<CToastContainerProps> = ({ toast, hiddenID }) => 
 	);
 };
 
-ToastContainer.propTypes = {
-	toast: shape({}),
-	hiddenID: number,
-};
-
-ToastContainer.defaultProps = {
-	toast: undefined,
-	hiddenID: undefined,
-};
 
 export default ToastContainer;
