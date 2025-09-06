@@ -31,9 +31,9 @@ const Toast: React.FC<CToastProps> = (props) => {
 		props.onClick ? ' ct-cursor-pointer' : '',
 		`ct-toast-${props.type}`,
 	].join(' ');
-	const borderLeft = `${props.bar?.size || '3px'} ${props.bar?.style || 'solid'} ${props.bar
-		?.color || colors[props.type]}`;
-
+	const borderLeft = `${props.bar?.size || '3px'} ${props.bar?.style || 'solid'} ${
+		props.bar?.color || colors[props.type]
+	}`;
 	const CurrentIcon = Icons[props.type];
 
 	const [animStyles, setAnimStyles]: [any, Function] = useState({ opacity: 0, [marginType]: -15 });
